@@ -87,7 +87,7 @@ class IntelCPU : public CPU<RegDataType, RegAmount>{
 				}
 			}
 			
-		};
+		}
 };
 
 #endif //__CPU_HPP__
