@@ -20,14 +20,14 @@ enum Flags{
 	OF = 1 << 11,
 	IOPL = (1 << 12) | (1 << 13),
 	NT = 1 << 14,
-#ifndef __16_BIT_ONLY__
+	#ifndef __16_BIT_ONLY__
 	RF = 1 << 16,
 	VM = 1 << 17,
 	AC = 1 << 18,
 	VIF = 1 << 19,
 	VIP = 1 << 20,
 	ID = 1 << 21
-#endif
+	#endif
 };
 
 enum IntelCPUType{
@@ -36,14 +36,14 @@ enum IntelCPUType{
 	Intel80286,
 	Intel80386,
 	Intel80486,
-        IntelPentium,
+	IntelPentium,
 	IntelPentiumMMX,
 	IntelPentiumPro,
 	IntelPentiumII,
 	IntelPentiumIII,
 	IntelPentium4,
 	IntelCore,
-	IntelCore2
+	IntelCore2,
 	IntelCorei7	
 };
 
@@ -51,5 +51,8 @@ template <typename RegDataType, unsigned int RegAmount>
 class CPU{
 	private:
 		RegDataType registers[RegAmount];
+	public:
+		CPU(){}
+		~CPU(){}
 };	
 #endif //__CPU_HPP__
