@@ -1,6 +1,7 @@
 #include <memory>
 #include <stdexcept>
 #include <cstring>
+
 #ifndef __MEMORY_UNIT_HPP__
 #define __MEMORY_UNIT_HPP__
 

@@ -1,6 +1,4 @@
-#include <stack>
 #include <iostream>
-#include <type_traits>
 #include <stdexcept>
 #include "cpu.hpp"
 
