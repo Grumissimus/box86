@@ -1,4 +1,6 @@
 #include <stack>
+#include <iostream>
+#include <type_traits>
 
 #ifndef __CPU_HPP__
 #define __CPU_HPP__
@@ -52,19 +54,40 @@ enum IntelCPUType{
 template <typename RegDataType, unsigned int RegAmount>
 class CPU{
 	protected:
-		RegDataType registers[RegAmount] = {0};
+		RegDataType generalRegisters[RegAmount+1] = {0};
+		RegDataType flags = 0;
 	public:
-		CPU(){}
-		~CPU(){}
-		void printRegisters(){}
+		virtual ~CPU() {};
+		virtual void printRegisters(){};
 };
 
-template<typename RegDataType, unsigned int RegAmount>
+template<typename RegDataType = unsigned int, unsigned int RegAmount = 8>
 class IntelCPU : public CPU<RegDataType, RegAmount>{
+	static_assert(RegAmount >= 8, "A number of registers in Intel CPU cannot be lower than 8.");
 	private:
 		IntelCPUType type;
 	public:
+		IntelCPU() : type(Intel8086) {};
 		IntelCPU(IntelCPUType t) : type(t) {};
+		~IntelCPU(){};
+
+		void printRegisters(){
+			std::cout << "Register A: " << this->generalRegisters[EAX] << std::endl;
+			std::cout << "Register B: " << this->generalRegisters[EBX] << std::endl;
+			std::cout << "Register C: " << this->generalRegisters[ECX] << std::endl;
+			std::cout << "Register D: " << this->generalRegisters[EDX] << std::endl;
+			std::cout << "Stack Register: " << this->generalRegisters[ESP] << std::endl;
+			std::cout << "Base Pointer: " << this->generalRegisters[EBP] << std::endl;
+			std::cout << "Source Index: " << this->generalRegisters[ESI] << std::endl;
+			std::cout << "Destination Index: " << this->generalRegisters[EDI] << std::endl;
+			
+			if(RegAmount > 8){
+				for(unsigned int i = 9; i <= RegAmount; i++){
+					std::cout << "General Register " << i << ":" << this->generalRegisters[i] << std::endl;
+				}
+			}
+			
+		};
 };
 
 #endif //__CPU_HPP__
