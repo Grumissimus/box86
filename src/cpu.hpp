@@ -1,3 +1,5 @@
+#include <stack>
+
 #ifndef __CPU_HPP__
 #define __CPU_HPP__
 enum Register{
@@ -49,10 +51,20 @@ enum IntelCPUType{
 
 template <typename RegDataType, unsigned int RegAmount>
 class CPU{
-	private:
-		RegDataType registers[RegAmount];
+	protected:
+		RegDataType registers[RegAmount] = {0};
 	public:
 		CPU(){}
 		~CPU(){}
-};	
+		void printRegisters(){}
+};
+
+template<typename RegDataType, unsigned int RegAmount>
+class IntelCPU : public CPU<RegDataType, RegAmount>{
+	private:
+		IntelCPUType type;
+	public:
+		IntelCPU(IntelCPUType t) : type(t) {};
+};
+
 #endif //__CPU_HPP__
